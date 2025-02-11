@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
+
+    <menu id="nail_studio" description="msg://com.bikbaev.nailstudio/menu_config.nail_studio.description"
+          title="msg://com.bikbaev.nailstudio/menu_config.nail_studio.title">
+        <item view="Client.list" title="msg://com.bikbaev.nailstudio.view.client/clientListView.title"/>
+        <item view="Service.list" title="msg://com.bikbaev.nailstudio.view.service/serviceListView.title"/>
+        <item view="MakeAppointment.list"
+              title="msg://com.bikbaev.nailstudio.view.makeappointment/makeAppointmentListView.title"/>
+        <item view="FreeEntriesList" title="msg://com.bikbaev.nailstudio.view.freeentrieslist/freeEntriesList.title"/>
+    </menu>
+    <menu opened="true" id="application" title="msg://com.bikbaev.nailstudio/menu.application.title">
+        <item view="User.list" title="msg://com.bikbaev.nailstudio.view.user/UserListView.title"/>
+    </menu>
+    <menu id="security">
+        <item view="sec_ResourceRoleModel.list"
+              title="msg://io.jmix.securityflowui.view.resourcerole/resourceRoleModelListView.menu"/>
+        <item view="sec_RowLevelRoleModel.list"
+              title="msg://io.jmix.securityflowui.view.rowlevelrole/rowLevelRoleModelListView.menu"/>
+    </menu>
+    <menu id="datatools">
+        <item view="datatl_entityInspectorListView"
+              title="msg://io.jmix.datatoolsflowui.view.entityinspector/listTitle"/>
+    </menu>
+</menu-config>

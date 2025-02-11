@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view" xmlns:calendar="http://jmix.io/schema/fullcalendar/ui"
+      title="msg://freeEntriesList.title">
+    <data>
+        <collection id="freeEntriesesDc_1" class="com.bikbaev.nailstudio.entity.FreeEntries">
+            <fetchPlan extends="_base">
+                <property name="master" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="freeEntriesesDl_1" readOnly="true">
+                <query>
+                    <![CDATA[select e from FreeEntries e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <urlQueryParameters id="urlQueryParameters">
+            <calendar:calendarParameters component="calendar"/>
+        </urlQueryParameters>
+        <settings auto="true"/>
+    </facets>
+    <layout>
+        <tabSheet id="contentTabSheet" height="100%" width="100%">
+            <tab id="calendarTab" label="msg://calendarTab.label">
+                <vbox width="100%" height="100%">
+                    <hbox id="calendarButtonsPanel">
+                        <button id="homeBtn" icon="vaadin:home"/>
+                        <button id="prevBtn" icon="vaadin:arrow-circle-left"/>
+                        <button id="nextBtn" icon="vaadin:arrow-circle-right"/>
+                        <h4 id="calendarTitle"/>
+                        <span id="spacer"/>
+                        <select id="calendarViewMode"/>
+                    </hbox>
+                    <calendar:calendar          weekNumbersVisible="true"
+                                                navigationLinksEnabled="true"
+                                                eventResizableFromStart="true"
+                                                eventDurationEditable="true"
+                                                eventStartEditable="true"
+                                                selectMirror="true"
+                                                dayMaxEvents="5"
+                                                id="calendar"
+                                                width="100%"
+                                                height="100%">
+                        <calendar:dataProviders>
+                            <calendar:containerDataProvider dataContainer="freeEntriesesDc_1"/>
+                        </calendar:dataProviders>
+                    </calendar:calendar>
+
+                </vbox>
+            </tab>
+
+            <tab id="freeEntriesTab" label="msg://freeEntriesList.title">
+                <vbox>
+                    <hbox id="buttonsPanel">
+                        <button id="createBtn" action="freeEntriesesDataGrid.create"/>
+                        <button id="editBtn" action="freeEntriesesDataGrid.edit"/>
+                        <button id="removeBtn" action="freeEntriesesDataGrid.remove"/>
+                        <simplePagination/>
+                    </hbox>
+                    <dataGrid id="freeEntriesesDataGrid" dataContainer="freeEntriesesDc_1" minWidth="100px"
+                              width="100%">
+                        <actions>
+                            <action id="create" type="list_create"/>
+                            <action id="edit" type="list_edit"/>
+                            <action id="remove" type="list_remove"/>
+                        </actions>
+                        <columns>
+                            <column property="master"/>
+                            <column property="data_time"/>
+                            <column property="status"/>
+                        </columns>
+                    </dataGrid>
+
+                </vbox>
+            </tab>
+        </tabSheet>
+    </layout>
+</view>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="nailStudio">
+        <dropForeignKeyConstraint baseTableName="MAKE_APPOINTMENT" constraintName="FK_MAKE_APPOINTMENT_ON_CLIENT"/>
+    </changeSet>
+    <changeSet id="2" author="nailStudio">
+        <dropForeignKeyConstraint baseTableName="MAKE_APPOINTMENT" constraintName="FK_MAKE_APPOINTMENT_ON_MASTER"/>
+    </changeSet>
+    <changeSet id="3" author="nailStudio">
+        <dropForeignKeyConstraint baseTableName="MASTER_PRICE" constraintName="FK_MASTER_PRICE_ON_MAKE_APPOINTMENT"/>
+    </changeSet>
+    <changeSet id="4" author="nailStudio">
+        <dropForeignKeyConstraint baseTableName="MASTER_PRICE" constraintName="FK_MASTER_PRICE_ON_MASTER"/>
+    </changeSet>
+    <changeSet id="5" author="nailStudio">
+        <dropForeignKeyConstraint baseTableName="MASTER_PRICE" constraintName="FK_MASTER_PRICE_ON_SERVICE"/>
+    </changeSet>
+    <changeSet id="6" author="nailStudio">
+        <dropTable cascadeConstraints="true" tableName="MAKE_APPOINTMENT"/>
+    </changeSet>
+    <changeSet id="7" author="nailStudio">
+        <dropTable cascadeConstraints="true" tableName="MASTER_PRICE"/>
+    </changeSet>
+</databaseChangeLog>

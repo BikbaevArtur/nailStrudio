@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://makeAppointmentListView.title"
+      focusComponent="makeAppointmentsDataGrid">
+    <data>
+        <collection id="makeAppointmentsDc"
+                    class="com.bikbaev.nailstudio.entity.MakeAppointment">
+            <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_instance_name">
+                    <property name="last_name"/>
+                    <property name="phone"/>
+                    <property name="discount"/>
+                </property>
+            </fetchPlan>
+            <loader id="makeAppointmentsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from MakeAppointment e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="makeAppointmentsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createButton" action="makeAppointmentsDataGrid.create"/>
+            <button id="editButton" action="makeAppointmentsDataGrid.edit"/>
+            <button id="removeButton" action="makeAppointmentsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="makeAppointmentsDl"/>
+        </hbox>
+        <dataGrid id="makeAppointmentsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="makeAppointmentsDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="client"/>
+                <column property="data_time"/>
+                <column property="payment"/>
+                <column property="status"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectButton" action="selectAction"/>
+            <button id="discardButton" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

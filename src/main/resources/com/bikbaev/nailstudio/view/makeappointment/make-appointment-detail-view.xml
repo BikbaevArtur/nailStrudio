@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://makeAppointmentDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="makeAppointmentDc"
+                  class="com.bikbaev.nailstudio.entity.MakeAppointment">
+            <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_instance_name">
+                    <property name="last_name"/>
+                    <property name="phone"/>
+                    <property name="discount"/>
+                </property>
+                <property name="service" fetchPlan="_base"/>
+                <property name="master" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader id="makeAppointmentDl"/>
+            <collection id="serviceDc" property="service"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="makeAppointmentDc">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="40em" columns="2"/>
+            </responsiveSteps>
+            <entityPicker id="clientField" property="client">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="masterField" property="master">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <dateTimePicker id="data_timeField" property="data_time"/>
+            <textField id="paymentField" property="payment"/>
+            <select id="statusField" property="status"/>
+        </formLayout>
+        <h4 text="msg://com.bikbaev.nailstudio.entity/MakeAppointment.service"/>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="serviceDataGrid.add"/>
+            <button action="serviceDataGrid.exclude"/>
+        </hbox>
+        <dataGrid id="serviceDataGrid" dataContainer="serviceDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="add" type="list_add"/>
+                <action id="exclude" type="list_exclude"/>
+            </actions>
+            <columns>
+                <column property="name"/>
+                <column property="price"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseButton" action="saveAction"/>
+            <button id="closeButton" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
